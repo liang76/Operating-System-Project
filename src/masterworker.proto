@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package masterworker;
+
+// The master service definition.
+service MapReduce {
+  // Assign map and reduce tasks to available tasks
+	rpc AssignTasks (TaskRequest) returns (TaskReply) {}
+}
+
+// The request message containing the shard information
+message TaskRequest {
+	string file_name = 1;
+	int32 start = 2;	
+	int32 end = 3;
+	int32 n_r = 4;
+	string type = 5;
+	string output_dir = 6;
+	string user_id = 7;
+	int32 file_id = 8;
+}
+
+// The response message containing the list of locations of intermediate files
+message TaskReply {
+	repeated string return_files = 1;
+}
